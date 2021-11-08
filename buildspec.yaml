@@ -1,10 +1,10 @@
-# Change the following to your desired values:
-#   __ACCOUNT_NUMBER__
-#   __ECR_REGION__
-#   __ECR_REPOSITORY_NAME__
-#   __ECS_CONTAINER_NAME__
-
 version: 0.2
+env:
+  exported-variables:
+    - ECR_REGION
+    - ECR_REPO_NAME
+    - ACCOUNT_NUMBER
+    - CONTAINER_NAME
 phases:
   install:
     runtime-versions:
@@ -13,8 +13,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --region us-east-1 --no-include-email)
-      - REPOSITORY_URI=965340621517.dkr.ecr.us-east-1.amazonaws.com/dev-ecr-master
+      - $(aws ecr get-login --region ${ECR_REGION} --no-include-email)
+      - REPOSITORY_URI=${ECR_REPO_NAME}
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
@@ -30,4 +30,4 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name”:"cool-app-dev","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name”:"${CONTAINER_NAME},"imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
