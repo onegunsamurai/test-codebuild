@@ -29,6 +29,7 @@ phases:
           mv terragrunt /usr/local/bin/ && chmod +x /usr/local/bin/terragrunt
         else
           echo "Terraform and terragrunt are installed"
+        fi
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t $REPOSITORY_URI:latest .
