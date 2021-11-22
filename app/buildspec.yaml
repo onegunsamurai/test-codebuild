@@ -32,7 +32,9 @@ phases:
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - cd ..
-      - cd environments/${ENV}/ecs
+      - cd environments
+      - terragrunt init
+      - cd ${ENV}/ecs
       - terragrunt plan
       - terragrunt apply -auto-approve
   post_build:
