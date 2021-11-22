@@ -11,11 +11,6 @@ phases:
       docker: 18
   pre_build:
     commands:
-      - |
-      if [ ! command -v terraform &> /dev/null ]; then
-        echo "terraform could not be found"
-      fi
-
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region ${ECR_REGION} --no-include-email)
@@ -24,6 +19,13 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
+      - |
+        if ! command -v terraform &> /dev/null
+        then
+          echo "Terraform is not installed"
+        else
+          echo "Terraform is installed"
+        fi
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t $REPOSITORY_URI:latest .
