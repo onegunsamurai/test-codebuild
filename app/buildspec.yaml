@@ -33,7 +33,7 @@ phases:
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - cd ..
       - cd environments
-      - terragrunt init
+      - terragrunt run-all init
       - cd ${ENV}/ecs
       - terragrunt plan
       - terragrunt apply -auto-approve
