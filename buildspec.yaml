@@ -11,7 +11,8 @@ phases:
       docker: 18
   pre_build:
     commands:
-      - if ! command -v terraform &> /dev/null
+      - |
+      if ! command -v terraform &> /dev/null
 then
     echo "terraform could not be found"
     exit
