@@ -30,6 +30,9 @@ phases:
       - cd app          
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - cd environments/${ENV}/ecs
+      - terragrunt plan
+      - terragrunt apply -auto-approve
   post_build:
     commands:
       - echo Build completed on `date`
