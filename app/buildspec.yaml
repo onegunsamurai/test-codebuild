@@ -5,6 +5,7 @@ env:
     - ECR_REPO_NAME
     - ACCOUNT_NUMBER
     - CONTAINER_NAME
+    - ENV
 phases:
   install:
     runtime-versions:
