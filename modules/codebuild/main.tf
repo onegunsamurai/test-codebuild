@@ -45,8 +45,36 @@ module "build" {
     source_credential_token         = local.github_oauth_token
     git_clone_depth                 = 1
     artifact_type                   = "NO_ARTIFACTS"
+    buildspec                       = "app/buildspec.yaml"
 
     delimiter = "-"
+
+    extra_permissions = [
+                "codebuild:*",
+                "codecommit:GetBranch",
+                "codecommit:GetCommit",
+                "codecommit:GetRepository",
+                "codecommit:ListBranches",
+                "codecommit:ListRepositories",
+                "cloudwatch:GetMetricStatistics",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ecr:DescribeRepositories",
+                "ecr:ListImages",
+                "elasticfilesystem:DescribeFileSystems",
+                "events:DeleteRule",
+                "events:DescribeRule",
+                "events:DisableRule",
+                "events:EnableRule",
+                "events:ListTargetsByRule",
+                "events:ListRuleNamesByTarget",
+                "events:PutRule",
+                "events:PutTargets",
+                "events:RemoveTargets",
+                "logs:GetLogEvents",
+                "s3:*"
+    ]
 
 
     # https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html
@@ -99,6 +127,11 @@ module "build" {
         "type": "PLAINTEXT"
         "value": "${var.app_name}-${var.env}-container"
       },
+      {
+        "name": "ENV"
+        "type": "PLAINTEXT"
+        "value": "${var.env}"
+      }
     ]
 
     # Optional extra environment variables
