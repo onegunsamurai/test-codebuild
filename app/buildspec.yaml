@@ -26,7 +26,8 @@ phases:
       - wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.12/terragrunt_linux_amd64 -o terragrunt
       - mv terragrunt /usr/local/bin/ && chmod +x /usr/local/bin/terragrunt
       - echo Build started on `date`
-      - echo Building the Docker image...          
+      - echo Building the Docker image...
+      - cd app          
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
