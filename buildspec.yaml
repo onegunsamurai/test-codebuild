@@ -12,11 +12,9 @@ phases:
   pre_build:
     commands:
       - |
-      if ! command -v terraform &> /dev/null
-then
-    echo "terraform could not be found"
-    exit
-fi
+      if [ ! command -v terraform &> /dev/null ]; then
+        echo "terraform could not be found"
+      fi
 
       - echo Logging in to Amazon ECR...
       - aws --version
