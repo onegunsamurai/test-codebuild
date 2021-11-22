@@ -49,31 +49,18 @@ module "build" {
 
     delimiter = "-"
 
-    extra_permissions = [
+        extra_permissions = [
                 "codebuild:*",
-                "codecommit:GetBranch",
-                "codecommit:GetCommit",
-                "codecommit:GetRepository",
-                "codecommit:ListBranches",
-                "codecommit:ListRepositories",
-                "cloudwatch:GetMetricStatistics",
-                "ec2:DescribeVpcs",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSubnets",
-                "ecr:DescribeRepositories",
-                "ecr:ListImages",
-                "elasticfilesystem:DescribeFileSystems",
-                "events:DeleteRule",
-                "events:DescribeRule",
-                "events:DisableRule",
-                "events:EnableRule",
-                "events:ListTargetsByRule",
-                "events:ListRuleNamesByTarget",
-                "events:PutRule",
-                "events:PutTargets",
-                "events:RemoveTargets",
-                "logs:GetLogEvents",
-                "s3:*"
+                "codecommit:*",
+                "cloudwatch:*",
+                "ec2:*",
+                "ecr:*",
+                "iam:*",
+                "elasticfilesystem:*",
+                "events:*",
+                "logs:*",
+                "s3:*",
+                "elasticloadbalancing:*"
     ]
 
 
