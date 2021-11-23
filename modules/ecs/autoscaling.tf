@@ -37,16 +37,6 @@ resource "aws_launch_configuration" "main" {
   associate_public_ip_address = false
   security_groups             = [aws_security_group.allow_80.id]
 
-  root_block_device {
-    volume_type = "standard"
-  }
-
-  ebs_block_device {
-    device_name = "/dev/xvdcz"
-    volume_type = "standard"
-    encrypted   = true
-  }
-
   user_data = <<EOF
 #!/bin/bash
 # The cluster this agent should check into.
