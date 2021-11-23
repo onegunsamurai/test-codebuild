@@ -45,4 +45,3 @@ phases:
     commands:
       - echo Build completed on `date`
       - printf '[{"name”:"${CONTAINER_NAME},"imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --region ${ECR_REGION} --force-new-deployment
