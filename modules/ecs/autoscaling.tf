@@ -1,7 +1,7 @@
 resource "aws_autoscaling_group" "main" {
   name = "ecs-${var.env}"
 
-  launch_configuration = aws_launch_configuration.main.id
+  launch_configuration = aws_launch_configuration.main.name
   
   vpc_zone_identifier  = var.private_subnet_ids
 
@@ -41,8 +41,6 @@ resource "aws_launch_configuration" "main" {
 #!/bin/bash
 # The cluster this agent should check into.
 echo 'ECS_CLUSTER=${var.env}-ecs-cluster' >> /etc/ecs/ecs.config
-# Disable privileged containers.
-echo 'ECS_DISABLE_PRIVILEGED=true' >> /etc/ecs/ecs.config
 EOF
 
 
