@@ -55,3 +55,7 @@ variable "max_capacity" {
 variable "min_capacity" {
   
 }
+
+variable "image_tag" {
+  
+}

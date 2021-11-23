@@ -49,7 +49,7 @@ module "build" {
 
     delimiter = "-"
 
-        extra_permissions = [
+    extra_permissions = [
                 "codebuild:*",
                 "codecommit:*",
                 "cloudwatch:*",
@@ -63,6 +63,7 @@ module "build" {
                 "elasticloadbalancing:*",
                 "autoscaling:*",
                 "ecs:*"
+
     ]
 
 
@@ -80,7 +81,7 @@ module "build" {
     aws_region          = var.aws_region
     aws_account_id      = var.account_id
     image_repo_name     = local.image_repo_name
-    image_tag           = "latest"
+    image_tag           = var.image_tag
 
     vpc_config = {
         vpc_id = var.vpc_id
@@ -120,6 +121,16 @@ module "build" {
         "name": "ENV"
         "type": "PLAINTEXT"
         "value": "${var.env}"
+      },
+      {
+        "name": "CLUSTER_NAME"
+        "type": "PLAINTEXT"
+        "value": "${var.env}-ecs-cluster"
+      },
+      {
+        "name": "SERVICE_NAME"
+        "type": "PLAINTEXT"
+        "value": "${var.env}-ecs-service"
       }
     ]
 

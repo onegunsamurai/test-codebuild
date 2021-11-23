@@ -34,3 +34,6 @@ variable "git_secret_arn" {
   
 }
 
+variable "image_tag" {
+  
+}

@@ -1,7 +1,7 @@
 
 locals {
     global_region   = "us-east-1"
-
+    image_tag       = "0.0.1"
     app_name        = "new-app"
     aws_profile     = "default"
     account_id      = "965340621517"
@@ -41,6 +41,7 @@ inputs = {
     region_2        = local.region_2
     num_of_zones    = local.num_of_zones
     global_region   = local.global_region
+    image_tag       = local.image_tag
 
     desired_capacity_dev    = local.desired_capacity_dev
     desired_capacity_prod   = local.desired_capacity_prod
