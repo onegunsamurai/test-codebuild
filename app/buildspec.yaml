@@ -39,7 +39,6 @@ phases:
       # - cd ${ENV}/ecs
       # - terragrunt plan
       # - terragrunt apply -auto-approve
-      - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
   post_build:
     commands:
       - echo Build completed on `date`
@@ -48,3 +47,4 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name”:"${CONTAINER_NAME},"imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
