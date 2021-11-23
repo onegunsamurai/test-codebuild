@@ -60,7 +60,9 @@ module "build" {
                 "events:*",
                 "logs:*",
                 "s3:*",
-                "elasticloadbalancing:*"
+                "elasticloadbalancing:*",
+                "autoscaling:DescribeLaunchConfigurations",
+                "ecs:DescribeTaskDefinition"
     ]
 
 
