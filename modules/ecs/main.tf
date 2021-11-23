@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "nginx" {
   container_definitions     = jsonencode([
       {
           name      = "${var.app_name}-${var.env}"
-          image     = "${aws_ecr_repository.default.repository_url}-${var.image_tag}"
+          image     = "${aws_ecr_repository.default.repository_url}:${var.image_tag}"
           cpu       = "${var.app_cpu}"
           memory    = "${var.app_memory}"
           essential = true
