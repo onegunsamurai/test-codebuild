@@ -34,7 +34,7 @@ phases:
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - cd ${CODEBUILD_SRC_DIR}/environments
-      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
       - terragrunt run-all init
       - cd ${ENV}/ecs
       - terragrunt plan -var="image_tag=${TAG}"
