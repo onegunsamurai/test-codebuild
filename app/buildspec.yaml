@@ -39,7 +39,7 @@ phases:
       # - cd ${ENV}/ecs
       # - terragrunt plan
       # - terragrunt apply -auto-approve
-      - aws ecs update-service --cluster <cluster name> --service <service name> --force-new-deployment
+      - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
   post_build:
     commands:
       - echo Build completed on `date`
