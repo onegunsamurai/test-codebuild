@@ -43,3 +43,18 @@ inputs = merge(
     max_capacity            = local.max_capacity
     }
 )
+
+remote_state {
+    backend = "s3"
+    generate = {
+        path = "backend.tf"
+        if_exists = "overwrite_terragrunt"
+    }
+    config = {
+        bucket     = "${local.common_vars.inputs.app_name}-${local.env}-${local.aws_region}-bucket"
+        key        = "${path_relative_to_include()}/terraform.tfstate"
+        encrypt    = true
+        profile    = local.common_vars.inputs.aws_profile
+        region     = local.aws_region
+    }
+}
