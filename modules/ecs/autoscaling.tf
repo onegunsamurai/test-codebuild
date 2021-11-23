@@ -28,7 +28,7 @@ resource "aws_autoscaling_group" "main" {
 
 
 resource "aws_launch_configuration" "main" {
-  name = "${var.env}-${var.aws_region}-LaunchConfig"
+  name = "${var.env}-launchConfig"
 
   iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.name
 
