@@ -33,12 +33,12 @@ phases:
       - cd app          
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-
       - cd ${CODEBUILD_SRC_DIR}/environments
+      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - terragrunt run-all init
       - cd ${ENV}/ecs
-      - terragrunt plan -var="image_tag=$IMAGE_TAG"
-      - terragrunt apply -var="image_tag=$IMAGE_TAG" -auto-approve
+      - terragrunt plan -var="image_tag=${TAG}"
+      - terragrunt apply -var="image_tag=${TAG}" -auto-approve
   post_build:
     commands:
       - echo Build completed on `date`
