@@ -51,7 +51,6 @@ resource "aws_ecs_service" "main" {
   name              = "${var.env}-ecs-service"
   cluster           = aws_ecs_cluster.main.id
   task_definition   = aws_ecs_task_definition.nginx.arn
-  desired_count     = var.node_count
 
   load_balancer {
     target_group_arn    = aws_alb_target_group.main.arn
@@ -66,8 +65,8 @@ resource "aws_ecs_service" "main" {
 
   capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.main.name
-    weight = 100
-    base = 2
+    weight = 200
+    base = var.desired_capacity
   }
 }
 
