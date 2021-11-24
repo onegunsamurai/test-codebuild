@@ -40,8 +40,8 @@ variable "app_name" {
 }
 
 variable "node_count" {
-  description = "Desired Amount of Fargate Nodes"
-  default = 1
+  description = "Desired Amount of Nodes/Instances"
+  default = 2
 }
 
 variable "desired_capacity" {

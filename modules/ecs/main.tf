@@ -66,8 +66,8 @@ resource "aws_ecs_service" "main" {
 
   capacity_provider_strategy {
     capacity_provider = aws_ecs_capacity_provider.main.name
-    weight = 1
-    base = 0
+    weight = 100
+    base = 2
   }
 }
 
