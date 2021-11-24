@@ -51,7 +51,8 @@ resource "aws_ecs_service" "main" {
   name              = "${var.env}-ecs-service"
   cluster           = aws_ecs_cluster.main.id
   task_definition   = aws_ecs_task_definition.nginx.arn
-
+  desired_count     = var.desired_capacity
+  
   load_balancer {
     target_group_arn    = aws_alb_target_group.main.arn
     container_name      = "${var.app_name}-${var.env}"

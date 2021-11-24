@@ -11,7 +11,7 @@ locals {
     environment_1     = "dev"
     region_1          = "us-east-1"
 
-    desired_capacity_dev    = 1
+    desired_capacity_dev    = 2
     max_capacity_dev        = 2
     min_capacity_dev        = 1
     dev_git_secret_arn      = "arn:aws:secretsmanager:us-east-1:965340621517:secret:git_token-n3hMog"
@@ -21,7 +21,7 @@ locals {
     environment_2        = "prod"
     region_2             = "us-west-1"
 
-    desired_capacity_prod     = 1
+    desired_capacity_prod     = 2
     max_capacity_prod         = 2
     min_capacity_prod         = 1
     prod_git_secret_arn       = "arn:aws:secretsmanager:us-west-1:965340621517:secret:git_token-sKWOkz"
