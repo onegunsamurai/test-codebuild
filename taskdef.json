@@ -1,0 +1,15 @@
+[
+    {
+        "name" : "${var.app_name}-${var.env}",
+        "image" : "${aws_ecr_repository.default.repository_url}:${var.image_tag}",
+        "cpu" : "${var.app_cpu}",
+        "memory" : "${var.app_memory}",
+        "essential" : true,
+        "portMappings" : [
+            {
+                "containerPort" : 80,
+                "hostPort" : 80
+            }
+        ]
+    }
+]

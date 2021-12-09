@@ -29,6 +29,10 @@ dependency "network" {
     }
 }
 
+dependency "ecs" {
+    config_path = "../ecs"
+}
+
 inputs = merge(
     local.common_vars.inputs,
     {
@@ -38,6 +42,10 @@ inputs = merge(
     aws_region              = local.aws_region
     env                     = local.env
     git_secret_arn          = local.git_secret_arn
+    aws_ecs_task_definition = dependency.ecs.outputs.aws_ecs_task_definition
+    target_group_name_1     = dependency.ecs.outputs.target_group_name_1
+    target_group_name_2     = dependency.ecs.outputs.target_group_name_2
+    listener_arns           = dependency.ecs.outputs.listener_arns
     }
 )
 

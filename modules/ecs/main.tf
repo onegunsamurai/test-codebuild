@@ -53,8 +53,12 @@ resource "aws_ecs_service" "main" {
   desired_count     = var.desired_capacity
   launch_type       = "EC2"
   
+  deployment_controller {
+  type = "CODE_DEPLOY"
+}
+  
   load_balancer {
-    target_group_arn    = aws_alb_target_group.main.arn
+    target_group_arn    = aws_alb_target_group.main.0.arn
     container_name      = "${var.app_name}-${var.env}"
     container_port      = 80
   }
