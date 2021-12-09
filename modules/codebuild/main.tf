@@ -192,7 +192,7 @@ resource "aws_codepipeline" "this" {
       output_artifacts = ["build"]
 
       configuration = {
-        ProjectName = "{aws_codebuild_project.this.name}"
+        ProjectName = "${aws_codebuild_project.this.name}"
       }
     }
   }
