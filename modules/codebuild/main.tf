@@ -7,7 +7,7 @@ data "aws_secretsmanager_secret_version" "git" {
 }
 
 locals {
-  github_oauth_token = jsondecode(data.aws_secretsmanager_secret_version.git.secret_string)["git_token"]
+  github_oauth_token = jsondecode(data.aws_secretsmanager_secret_version.git.secret_string)["git_token_dec"]
   image_repo_name     = "${var.env}-ecr-master"
 }
 

@@ -32,8 +32,9 @@ resource "aws_launch_configuration" "main" {
 
   iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.name
 
-  instance_type               = "t2.micro" #Can be improved
+  instance_type               = "t3.medium" #Can be improved
   image_id                    = "${data.aws_ami.ecs_ami.image_id}"
+  spot_price                  = "0.0125"
   associate_public_ip_address = false
   security_groups             = [aws_security_group.allow_80.id]
 

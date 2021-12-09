@@ -12,7 +12,6 @@ data "aws_ami" "ecs_ami" {
 resource "aws_ecs_cluster" "main" {
   name              = "${var.env}-ecs-cluster"
   # Internal Module Dependency Hook to create ECR prior ECS
-  capacity_providers = [aws_ecs_capacity_provider.main.name]
   lifecycle {
     create_before_destroy = true
   }
@@ -52,6 +51,7 @@ resource "aws_ecs_service" "main" {
   cluster           = aws_ecs_cluster.main.id
   task_definition   = aws_ecs_task_definition.nginx.arn
   desired_count     = var.desired_capacity
+  launch_type       = "EC2"
   
   load_balancer {
     target_group_arn    = aws_alb_target_group.main.arn
@@ -64,26 +64,6 @@ resource "aws_ecs_service" "main" {
     aws_alb_listener.main
   ]
 
-  capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.main.name
-    weight = 200
-    base = var.desired_capacity
-  }
 }
 
 
-resource "aws_ecs_capacity_provider" "main" {
-  name = "${var.env}-cap-provider"
-
-  auto_scaling_group_provider {
-    auto_scaling_group_arn         = aws_autoscaling_group.main.arn
-    managed_termination_protection = "DISABLED"
-
-    managed_scaling {
-      maximum_scaling_step_size = 2
-      minimum_scaling_step_size = 1
-      status                    = "ENABLED"
-      target_capacity           = 100
-    }
-  }
-}
