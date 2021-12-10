@@ -276,13 +276,7 @@ data "aws_iam_policy_document" "codebuild" {
       "ecr:InitiateLayerUpload",
       "ecr:PutImage",
       "ecr:UploadLayerPart",
-      "ecs:RunTask",
-      "iam:PassRole",
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
-      "ssm:GetParameters",
-      "secretsmanager:GetSecretValue"
+      "ecs:RunTask"
     ]
 
     resources = ["*"]
@@ -331,7 +325,7 @@ resource "aws_codebuild_project" "this" {
     environment_variable {
       name = "ECR_REPO_NAME"
       type = "PLAINTEXT"
-      value = "${local.image_repo_name}"
+      value = "${var.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${local.image_repo_name}}"
     }
     environment_variable {
       name = "ECR_REGION"

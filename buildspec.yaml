@@ -12,7 +12,6 @@ env:
     - SUBNET_1
     - SUBNET_2
     - SECURITY_GROUP
-    - DOCKERHUB_PASSWORD
 phases:
   install:
     runtime-versions:
@@ -20,7 +19,6 @@ phases:
     commands:
       - apt-get update
       - apt install jq
-      - echo "${DOCKERHUB_PASSWORD}" | docker login -u onegunsamurai --password-stdin
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -40,9 +38,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - cd app          
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-      - docker push $REPOSITORY_URI:latest
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - cd ..
       # - cd ${CODEBUILD_SRC_DIR}/environments
