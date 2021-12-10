@@ -270,11 +270,19 @@ data "aws_iam_policy_document" "codebuild" {
     effect = "Allow"
 
     actions = [
-      "ecr:InitiateLayerUpload",
-      "ecr:UploadLayerPart",
-      "ecr:CompleteLayerUpload",
       "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:GetAuthorizationToken",
+      "ecr:InitiateLayerUpload",
       "ecr:PutImage",
+      "ecr:UploadLayerPart",
+      "ecs:RunTask",
+      "iam:PassRole",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "ssm:GetParameters",
+      "secretsmanager:GetSecretValue"
     ]
 
     resources = ["*"]
