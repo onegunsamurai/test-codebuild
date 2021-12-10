@@ -12,9 +12,11 @@ env:
     - SUBNET_1
     - SUBNET_2
     - SECURITY_GROUP
+    - DOCKERHUB_PASSWORD
 phases:
   install:
     runtime-versions:
+      - echo "${DOCKERHUB_PASSWORD}" | docker login -u onegunsamurai --password-stdin
       docker: 18
     commands:
       - apt-get update
