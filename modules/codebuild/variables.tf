@@ -53,3 +53,7 @@ variable "aws_ecs_task_definition" {
 variable "listener_arns" {
 
 }
+
+variable "docker" {
+  default = "arn:aws:secretsmanager:us-east-1:965340621517:secret:d_hub_pass-yhXJhK"
+}

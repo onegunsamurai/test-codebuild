@@ -7,7 +7,6 @@ data "aws_secretsmanager_secret_version" "git" {
 }
 
 
-
 locals {
   github_oauth_token = jsondecode(data.aws_secretsmanager_secret_version.git.secret_string)["git_token_dec"]
   image_repo_name     = "${var.env}-ecr-master"
@@ -372,6 +371,7 @@ resource "aws_codebuild_project" "this" {
       name  = "SECURITY_GROUP"
       value = "${aws_security_group.codebuild_security.id}"
     }
+
   }
   source {
     type = "CODEPIPELINE"
