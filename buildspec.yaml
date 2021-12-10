@@ -20,6 +20,7 @@ phases:
     commands:
       - apt-get update
       - apt install jq
+      - echo "${DOCKERHUB_PASSWORD}" | docker login -u onegunsamurai --password-stdin
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -38,8 +39,7 @@ phases:
       # - chmod u+x terragrunt_linux_amd64 && mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
       - echo Build started on `date`
       - echo Building the Docker image...
-      - cd app      
-      - docker login    
+      - cd app          
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - docker push $REPOSITORY_URI:latest
