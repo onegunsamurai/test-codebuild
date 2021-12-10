@@ -8,4 +8,3 @@ Resources:
           ContainerName: "$CONTAINER_NAME"
           ContainerPort: "80"
         PlatformVersion: "LATEST"
-        RequiresCompatibilities: "EC2"
