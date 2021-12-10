@@ -16,11 +16,12 @@ env:
 phases:
   install:
     runtime-versions:
-      - echo "${DOCKERHUB_PASSWORD}" | docker login -u onegunsamurai --password-stdin
+
       docker: 18
     commands:
       - apt-get update
       - apt install jq
+      - echo "${DOCKERHUB_PASSWORD}" | docker login -u onegunsamurai --password-stdin
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
