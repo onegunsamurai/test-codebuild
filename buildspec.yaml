@@ -54,7 +54,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - printf '[{"name”:"${CONTAINER_NAME},"imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - aws ecs describe-task-definition --task-definition green-blue-ecs-example | \ jq '.taskDefinition' > taskdef.json
+      - aws ecs describe-task-definition --task-definition cool-app-dev | \ jq '.taskDefinition' > taskdef.json
       - envsubst < appspec_template.yaml > appspec.yaml
 
 artifacts:
