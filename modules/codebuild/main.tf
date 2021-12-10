@@ -325,7 +325,7 @@ resource "aws_codebuild_project" "this" {
     environment_variable {
       name = "ECR_REPO_NAME"
       type = "PLAINTEXT"
-      value = "${var.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${local.image_repo_name}}"
+      value = "${var.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/${local.image_repo_name}"
     }
     environment_variable {
       name = "ECR_REGION"
