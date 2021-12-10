@@ -340,7 +340,7 @@ resource "aws_codebuild_project" "this" {
     environment_variable {
       name = "CONTAINER_NAME"
       type = "PLAINTEXT"
-      value = "${var.app_name}-${var.env}-container"
+      value = "${var.app_name}-${var.env}"
     }
     environment_variable {
       name = "ENV"
