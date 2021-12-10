@@ -53,10 +53,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - printf '[{"name”:"${CONTAINER_NAME},"imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - NEW_ARN=$(aws ecs list-services --cluster ${APP_NAME}-${ENV}-cluster | jq -r .serviceArns[])
-      - NEW_TASKDEF=$(aws ecs describe-services --cluster ${APP_NAME}-${ENV}-cluster --service ${NEW_ARN} | jq -r .services[].taskDefinition)
-      - aws ecs describe-task-definition --task-definition ${NEW_TASKDEF} | \
-        jq '.taskDefinition' > taskdef.json
+      - aws ecs describe-task-definition --task-definition web_servers | \ jq '.taskDefinition' > taskdef.json
       - envsubst < appspec_template.yaml > appspec.yaml
 
 artifacts:
